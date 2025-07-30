@@ -1,0 +1,494 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" href="{% static "style.css"%}">
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+        <style>
+            .sub-menu{
+                display:none;
+            }
+            .dropdown:hover .sub-menu{
+                display:block;
+                position: absolute;
+                margin-top:15px;
+                margin-left: 50px;
+            }
+            .dropdown:hover .sub-menu ul{
+                display:block;
+                margin:10px;
+            }
+            .dropdown:hover .sub-menu ul li{
+                width:100px;
+                padding:8px;
+                border-bottom:1px dotted #fff;
+                background: #AB4459;
+                border-radius:0;
+                text-align:left;
+            }
+            .dropdown:hover .sub-menu ul li:hover{
+                background: #AB4470;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+              var availableTags = [];
+              $.ajax({
+                method: "GET",
+                url: "/product-list",
+                success: function(response){
+                    startAutocomplete(response)
+                }, 
+                
+            });
+            function startAutocomplete(availableTags){
+              $( "#searchproduct" ).autocomplete({
+                source: availableTags
+              });
+            }
+            });
+
+            </script>
+            
+            <link rel="stylesheet" href="{% static "checkout.css" %}">
+            <link rel="stylesheet" href="{% static "cart.css" %}">
+            <link rel="stylesheet" href="{% static "orderview.css" %}">
+            <script>
+                $(document).ready(function () {
+                    $('.delete-btn').click(function (e) {
+                        e.preventDefault();
+                
+                        var product_id= $(this).closest('.cart-left').find('.prod_id').val();
+                        var token= $('input[name=csrfmiddlewaretoken]').val();
+                        $.ajax({
+                            method: "POST",
+                            url: "/delete-cart-item",
+                            data: {
+                                'product_id':product_id,
+                                csrfmiddlewaretoken: token
+                            },
+                            success: function(response){
+                                $('.cart').load(location.href + ".cart");
+                            }, 
+                            
+                        });
+                        
+                    });
+                });
+            </script>
+            <style>
+                .delete-btn{
+                    height:25px;
+                    width: 60px;
+                    border-radius: 3px;
+                    border:none;
+                    cursor: pointer;
+                    background: #FA4032;
+                    color: white;
+                }
+                .cart-right{
+                    max-height: 150px;
+                }
+            </style>
+            <link rel="stylesheet" href="{% static "collection.css"%}">
+            <style>
+                .row{
+                    background: #fbfbfb;
+                    width: 150px;
+                }
+                .ratting .star{
+                    width: 70px;
+                }
+                .price h4{
+                    color: #111;
+                    font-size: 15px;
+                    text-transform: capitalize;
+                    font-weight: 400;
+                }
+            </style>
+            <style>
+                nav{
+                    background: #3B1C32;
+                }
+            @media only screen and (max-width: 900px){
+                nav{
+                    flex-wrap: wrap;
+                    
+                }
+                nav .fimg{
+                    width:130px;
+                }
+                .nav-search{
+                    order: 10;
+                    margin: 10px 0 0 5px;
+                    max-width: 50vh;
+                    
+                    {% comment %} height:30px; {% endcomment %}
+                    
+                }
+                
+                .nav-search-category{
+                    display:none;
+                }
+                .slide .im img{
+                    width:10px;
+                }
+                .header-slider a{
+                    top:28%;
+                    padding:2vh 1vw;
+                    font-size:15px;
+                }
+            }
+            .slide .im img{
+                width:200px;
+            }
+            @media only screen and (max-width: 673px){
+                .nav-country{
+                    display:none;
+                }
+                .dropdown{
+                    width: 40px;
+                    
+                }
+                
+                .nav-cart{
+                   weidth:20px; 
+                    
+                }
+                .nav-bottom{
+                    font-size:13px;
+                    gap:10px;
+                    overflow-x:scroll;
+                }
+                .nav-bottom::-webkit-scrollbar{
+                    display: none;
+                }
+                .nav-bottom p{
+                    text-wrap: nowrap;
+                }
+                
+            }
+            @media only screen and (max-width: 460px){
+                .header-slider a{
+                    top:28%;
+                }
+                .nav-search{
+                    max-width: 30vh;
+                    
+                }
+                .dropdown .dropbtn{
+                    font-size: 15px;
+                }
+                .dropdown .u{
+                    width:17px;
+                    height:17px;
+                }
+                .nav-text{
+                    margin-top: 4px;
+                }
+                .nav-text h1{
+                    font-size:12px;
+                }
+                .nav-cart{
+                    margin-top:4px;
+                }
+                .nav-cart img{
+                    width:27px;
+                }
+                .nav-cart h4{
+                    font-size: 10px;
+                }
+                footer{
+                    justify-content: center;
+                    
+                    
+                }
+                footer img{
+                    width:140px;
+                }
+                footer p{
+                    font-size: 10px;
+                }
+                
+            }
+            @media only screen and (max-width: 498px){
+                .product-catagory{
+                    grid-template-columns: repeat(auto-fit, minmax(140px, auto));
+                    padding: 5px 10px 5px 0px;
+                    gap: 0.5rem;
+                }
+                .heading p{
+                    font-size: 20px;
+                }
+                .new{
+                    padding: 5px 5px 5px 5px;
+                }
+                .row-c{
+                    width:150px;
+                    padding-bottom: 9px;
+                }
+                .row-c .img{
+                    width:130px;
+                }
+                
+                .row-c .t{
+                    font-size: 13px;
+                }
+                .row-c .p{
+                    font-size: 13px;
+                }
+                .sale{
+                    display: none;
+                }
+                .slider-1{
+                    display: none;
+                }
+                .name{
+                    display: none;
+                }
+            }
+            @media only screen and (max-width: 390px){
+                .nav-search{
+                    max-width: 29vh;
+                    
+                }
+                nav .fimg{
+                    width:100px;
+                }
+                footer img{
+                    width:110px;
+                }
+                footer p{
+                    font-size: 8px;
+                }
+                
+            }
+        </style>
+
+        <style>
+            @media only screen and (max-width: 900px){
+                .cart{
+                    flex-wrap: wrap;
+                }
+                .product-cart-list{
+                    padding: 24px 0;
+
+                }
+                .product-cart-list img{
+                    width: 80px;
+                }
+                .product-cart-titleprice{
+                    flex-wrap: wrap;
+                    font-size: 14px;
+                }
+                .product-cart-delevery{
+                    font-size: 13px;
+                }
+                
+            }
+            @media only screen and (max-width: 600px){
+                .cart-right{
+                    min-width: 100%;
+                }
+            }
+            @media only screen and (max-width: 560px){
+                .content-table2{
+                    font-size: 0.7em;
+                    width: 100%;
+                }
+                .content-table2 th,
+                .content-table2 td{
+                padding: 5px 7px;
+                }
+                .content-table2 td button{
+                    height: 26px;
+                    width: 53px;
+                    font-size: 10px;
+                    
+                }
+            }
+            @media only screen and (max-width: 418px){
+                .content-table2 tr .tr,
+                .content-table2 tbody tr .tr{
+                    display: none;
+                }
+            }
+            .star-img{
+                display: none;
+            }
+            @media only screen and (max-width: 373px){
+                .star-img{
+                    display: flex;
+                }
+                .fimg{
+                    display: none;
+                }
+                .nav-search{
+                    width: 800px;
+                    margin-right: 20px;
+                }
+                .nav-search-input{
+                    width: 800px;
+                }
+            }
+            @media only screen and (max-width: 441px){
+                .product{
+                    grid-template-columns: repeat(auto-fit, minmax(140px, auto));
+                    gap: 1rem;
+                    padding:10px; 
+                }
+                footer{
+                    gap-x: 5rem;
+                    display: flex;
+                    align-items: space-between;
+                    pading: 10px 20px;
+                }
+                footer img{
+                    width: 150px;
+                }
+            }
+            @media only screen and (max-width: 371px){
+                .row .img{
+                    width: 110px;
+                }
+                .product{
+                    grid-template-columns: repeat(auto-fit, minmax(110px, auto));
+                    gap: 0.5rem;
+                    padding:10px; 
+                }
+                .row{
+                    margin-left: 0px;
+                }
+            }
+            .main{
+                padding-left: 0px;
+            }
+            .content-table{
+                min-width: 200px;
+            }
+            @media(max-width: 408px){
+                h6 span{
+                    padding-left: 10px;
+                }
+                .orderpack button{
+                    font-size: 0.8em;
+                }
+                .form{
+                    margin-left:0px;
+                }
+                .content-table{
+                    min-width: 100px;
+                }
+                .box2{
+                    margin-right: 150px;
+                }
+                .main{
+                    padding:0px;
+                }
+                section{
+                    margin: 0px;
+                }
+            }
+            @media(max-width: 379px){
+                .box2{
+                    padding-left: 10px;
+                    padding-right: 5px;
+                }
+                
+            }
+        </style>
+        </head>
+<body>
+    <nav>
+        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180"><img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""></a>
+        <div class="nav-country">
+            <img src="{% static "./assets/location_icon.png" %}" height="20" alt="">
+            <div>
+                <p>Deliver to</p>
+                <h1>United Kingdom</h1>
+            </div>
+        </div>
+        <form action="{% url "searchproducts" %}" method="POST">
+        <div class="nav-search">
+            
+            <div class="nav-search-category">
+                <p>All</p>
+                <img src="{% static "./assets/dropdown_icon.png" %}" height="12" alt="">
+            </div>
+            {% csrf_token %}
+            <input type="search" id="searchproduct" class="nav-search-input" placeholder="Search products , and more" name="productsearch" required>
+            <button type="submit"><img src="{% static "./assets/search_icon.png" %}" class="nav-search-icon" alt=""></button>
+        
+        </div>
+    </form>
+
+        
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <img class="u" src="{% static "./assets/user.png" %}" width="20px" alt="">
+                <a class="dropbtn">{{ request.user }}</a>
+                <img src="{% static "./assets/dropdown_icon.png" %}" height="10px" width="10px" class="d" alt="">
+                <div class="sub-menu">
+                    <ul> 
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Actions</a></li>
+                        <li><a href="{% url 'log' %}">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+                {% else %}
+                <div class="nav-text">
+                    <p><a href="{% url "signup" %}">Hello, Sign in</a></p>
+                    <h1>Account & Lists <img src="{% static "./assets/dropdown_icon.png" %}" width="8px" alt=""></h1
+                </div>
+                {% endif %}
+                <div class="nav-text">
+                    <a href="{% url "myorders" %}"><p>Return</p>
+                    <h1>& Orders</h1></a>
+                </div>
+        <a href="/cart.html" class="nav-cart">
+            <img src="{% static "./assets/cart_icon.png" %}" width="35px" alt="">
+            <h4>Cart</h4>
+        </a>
+    </nav>
+    
+        <div class="nav-bottom">
+            <div>
+                <img src="{% static "./assets/menu_icon.png" %}" width="25px" alt="">
+                <p>All</p>
+            </div>
+            <p>Todey's Deals</p>
+            <p>customer Service</p>
+            <p>Registry</p>
+            <p>Gifts Cards</p>
+            <p>Sell</p>
+        </div>
+
+        <script src="{% static "script.js" %}"></script>
+    {% block index %}
+
+    {% endblock %}
+
+    {% block checkout %}
+    
+    {% endblock %}
+
+    {% block cart %}
+    
+    {% endblock %}
+
+    {% block collection %}
+    
+    {% endblock %}
+    {% block orderview %}
+    
+    {% endblock %}
+
+    </body>
+</html>

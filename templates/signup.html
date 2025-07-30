@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="{% static "signin.css" %}">
+</head>
+<body>
+    <a href="/"><img class="logo" src="{% static "./assets/amazon_logo_dark.png" %}" width="100px" 
+        alt=""></a>
+        <div class="signin-container">
+            <h1 class="signin-title">Sign Up</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+            <h5 class="input-lable">User Name</h5>
+            <input type="text" placeholder="Enter user-name" name="username">
+            <h5 class="input-lable">Password</h5>
+            <input type="password" placeholder="At least 6 characters" name="password1">
+            <h5 class="input-lable">Confirm Password</h5>
+            <input type="password" name="password2">
+            <button>Continue</button>
+            </form>
+            <p class="signin-condition">By continuing, you agree to Amazon's <span>Conditions of
+                Use</span> and <span>Privacy Notice</span>.</p>
+            <p class="signin-help">&#9656 <span>Need Help</span></p>
+        <hr>
+        <h4>Buying for work?</h4>
+        <p class="signin-busisness"><span>Shop on Amazon Busisness</span></p>
+        </div>
+        
+        <div class="signin-bottom">
+            {% comment %} <hr>
+            <p>Have an account</p>
+            <hr>
+        </div>
+        <a href="/signin.html">
+        <button class="signin-signup-btn">Login with account</button>
+    </a> {% endcomment %}
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %} 
+
+
+
+    {% block collection %}
+    <div class="product">
+        {% for item in Product %}
+        <a href="{% url "product-page" item.name item.slug %}">
+        <div class="row">
+            <img src="{{item.image.url}}" class="img" alt="">
+            <div class="product-offer">
+                <p>27% off</p> <span>Deal</span>
+            </div>
+            <div class="product-text">
+                <h5>Sale</h5>
+            </div>
+        <div class="heart-icon">
+            <i class='bx bx-heart'></i>
+        </div>
+        <div class="ratting">
+            <img src="{% static "./assets/rating_img.png" %}" class="star">
+        </div>
+        <div class="price">
+            <h4>Half running set</h4>
+            <p>₹{{item.selling_price}}0</p>
+        </div>
+        </div>
+        </a>
+         {% endfor %} 
+    </div>
+    <footer>
+        <img src="{% static "./assets/city.png" %}" width="170" alt="">
+        <p>@ 1996-2024, Conti Market Corner.com, Inc. or its affiliates</p>
+    </footer>
+    {% endblock %}
+    
+

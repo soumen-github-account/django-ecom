@@ -1,0 +1,179 @@
+    {% extends "base.html" %}
+    
+    {% load static %}
+    {% block index %}
+    
+    
+        <div class="header-slider">
+            <a href="#" class="control_prev">&#129144</a>
+            <a href="#" class="control_next">&#129146</a>
+            <ul>
+                <img src="{% static "./assets/header4.jpg" %}" class="header-image" alt="">
+                <img src="{% static "./assets/header2.jpg" %}" class="header-image" alt="">
+                <img src="{% static "./assets/header3.jpg" %}" class="header-image" alt="">
+                <img src="{% static "./assets/header1.jpg" %}" class="header-image" alt="">
+                <img src="{% static "./assets/header5.jpg" %}" class="header-image" alt="">
+                <img src="{% static "./assets/header6.jpg" %}" class="header-image" alt="">
+            </ul>
+        </div>
+    
+        {% comment %} <div class="box-row header-box">
+            <div class="box-col">
+                <h3>Free international returns</h3>
+                <img src="{% static "./assets/box1-1.jpg" %}" alt="">
+                <a href="/">Shop More</a>
+            </div>
+    
+            <div class="box-col">
+                <h3>Luner New Year</h3>
+                <img src="{% static "./assets/box1-2.jpg" %}" alt="">
+                <a href="/">Shop More</a>
+            </div>
+    
+            <div class="box-col">
+                <h3>Toys for kids</h3>
+                <img src="{% static "./assets/box1-3.jpg" %}" alt="">
+                <a href="/">Shop More</a>
+            </div>
+    
+            <div class="box-col">
+                <h3>Deals in pc</h3>
+                <img src="{% static "./assets/box1-4.jpg" %}" alt="">
+                <a href="/">Shop More</a>
+            </div>
+    
+        </div> {% endcomment %}
+        <div class="sale header-box">
+            <img src="{% static "./assets/slid2.jpg" %}" alt="">
+        </div>
+        <div class="name">
+            <p>DISCOUNT <span>UP TO 50%</span></p>
+        </div>
+        <div class="slider-1">
+            <div class="slides">
+                <div class="slid first">
+                    {% for item in Slide1 %}
+                    <div class="im">
+                        <a href="{% url "col" item.slug %}">
+                        <img src="{{ item.image.url }}" alt="">
+                        <div class="s">{{ item.name }}<span>80% OFF</span></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="slid">
+                    {% for item in Slide2 %}
+                    <div class="im">
+                        <a href="{% url "col" item.slug %}">
+                        <img src="{{ item.image.url }}">
+                        <div class="s">{{ item.name }}<span>80% off</span></div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            <div class="bottom">
+                
+            </div>
+        </div>
+
+        <div class="cl">
+        <div class="heading">
+            <p>Top <span>Products</span> in market</p>
+        </div>
+        <hr>
+    </div>
+    
+        <section class="new">
+            <div class="product-catagory">
+                {% for item in Catagory %}
+                <div class="row-c">
+                <a href="{% url "col" item.slug %}">
+                <div class="row-img">
+                <img src="{{item.image.url}}" class="img" alt="/img">
+                    </div>
+                <div class="text-c">
+                    <p>{{ item.name }}</p>
+                </div>
+                <div class="t">
+                    <h4>50%-80% off</h4>  
+                </div>
+                <p class="p">Shop now</p>
+            </a>
+                </div>
+                {% endfor %}
+                </div>
+    </section>
+    
+    <footer>
+        <img src="{% static "./assets/city.png" %}" width="170" alt="">
+        <p>@ 1996-2024, Contai Market Corner.com, Inc. or its affiliates</p>
+    </footer>
+
+
+        <script>
+            const slides = document.querySelectorAll(".slid");
+
+            slides.forEach((slid,index)=>{
+                slid.style.left = `${index*100}%`;
+            });
+            
+            let l = slides.length;
+            const bottom = document.querySelector(".bottom");
+            for(let i=1; i<=l;i++){
+                const div =document.createElement('div');
+                div.className = 'button';
+                bottom.appendChild(div);
+            };
+            const buttons = document.querySelectorAll(".button");
+            let count = 0;
+            const slideImage = ()=>{
+                slides.forEach(
+                    (slid)=>{
+                        slid.style.transform = `translateX(-${count*100}%)`;
+                    }
+                )
+            }
+            
+            const gonext =()=>{
+                count++;
+                
+                slideImage();
+            }
+            const getfirst=()=>{
+                slides.forEach(
+                    (slid)=>{
+                        slid.style.transform = `translateX(-0%)`;
+                    }
+                )
+                count = 0;
+            }
+            
+            let slideIntarval;
+            const start=()=>{
+                slideIntarval=setInterval(()=>{
+                count < l-1 ? gonext():getfirst();
+                colorchange();
+            },5000);
+            
+            };
+            start();
+            buttons[0].style.background='white';
+            const resetBg=()=>{
+                buttons.forEach(
+                    (button)=>{
+                        button.style.background='grey';
+                    }
+                )
+            }
+            
+            const colorchange=()=>{
+                resetBg();
+                buttons[count].style.background='white';
+            };
+        </script>
+        <script src="{% static "script.js" %}"></script>
+        {% endblock %}
+
+    

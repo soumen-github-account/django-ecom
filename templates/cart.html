@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block cart %}
+
+    <div class="cart">
+        <div class="cart-left cartdata">
+            <h1>Shopping Cart</h1>
+            <hr>
+            {% if cart %}
+            {% for item in cart %}
+            <div class="product-cart-list">
+                <img src="{{ item.product.image.url }}" width="180px" alt="">
+                <div>
+                <div class="product-cart-titleprice">
+                    <p>{{ item.product.name }}
+                    </p>
+                    <p>Rs.<b>{{ item.product.selling_price }}</b></p>
+                    
+                </div>
+                <p class="product-cart-bestseller"><span>#1 Best Seller</span> in Computer
+                    Tablets</p>
+                    <p class="product-cart-stock">In Stock</p>
+                    <p class="product-cart-delevery">Free delevery <b></b>Mon, Nov 29</b> available at checkout</p>
+                    <p class="product-cart-returns">Free Returns &#11191</p>
+                    <p class="product-cart-giftoption">Gift options not available.
+                        <span>Learn More</span>
+                    </p>
+                    <input type="hidden" value="{{ item.product_id }}" class="prod_id">
+                    {% csrf_token %}
+                    <div class="cart-list-action">
+                        <button type="submit" class="action-btn delete-btn"><p>Delete</p></button>
+                        <hr>
+                        <p class="action-btn">Share</p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <hr>
+            {% endfor %}
+            {% else %}
+                <p>No item in cart</p>
+                {% endif %}       
+        </div>
+        
+        <div class="cart-right">
+            {% if cart %}
+            <div class="cart-free-delevery">
+                <p>&#x2705</p>
+                <p>Your order qualifies for shipping. <b>
+                    Chose this option at checkout.
+                </b>See details.</p>
+            </div>
+            <p class="cart-subtotal">Subtotal: <b>Rs.  {{ totalprice }}</b></p>
+            <a href="{% url "checkout" %}"><button>Proceed to Checkout</button></a>
+            {% else %}
+            <p>No item in cart</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+    {% endblock %}

@@ -1,0 +1,105 @@
+section{
+    background: #ffffff;
+    margin: 20px 20px 20px 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form{
+    /* border-top: 0.5px solid black;
+    border-left: 0.5px solid black; */
+    box-shadow: 0 0 5px rgb(22, 22, 22);   
+    margin-left: 50px;
+    padding: 20px;
+    background: #fff;
+    margin-top: 20px;
+    max-width: 60vh;
+    display: grid;
+    height: 500px;
+    border-radius: 5px;
+}
+.form input{
+    outline: none;
+    margin: 5px 0 10px 0;
+    width:100%;
+    height: 30px;
+    padding-left: 10px;
+    border-radius: 3px;
+    border: 0.3px solid rgb(31, 31, 31);
+}
+
+.form #ad{
+    height: 60px;
+}
+.form input:focus{
+    outline: 3px solid #c2f2ff;
+}
+
+form hr{
+    margin: 10px 0 10px 0;
+}
+
+.main{
+    display: flex;
+    padding-left: 90px;
+}
+
+.box2{
+    margin-left: 140px;
+    margin-top: 20px; 
+}
+.box2 .orderpack{
+    padding: 20px 10px 20px 10px;
+    max-width: 80vh;
+    box-shadow: 0 0 5px rgb(22, 22, 22);
+}
+.orderpack hr{
+    margin: 10px 0 10px 0;
+}
+
+
+.content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+}
+.content-table thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.content-table th{
+    padding: 12px 15px;
+}
+.content-table td{
+    padding: 2px 15px;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #a39f9f;
+}
+
+h6{
+    font-size: 1em;
+    padding-left: 10px;
+}
+h6 span{
+    padding-left: 200px;
+}
+
+.orderpack button{
+    margin-top: 20px;
+    width: 100%;
+    height: 30px;
+    background: #378435;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 400;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.orderpack button:hover{
+    background: #0db008;
+}

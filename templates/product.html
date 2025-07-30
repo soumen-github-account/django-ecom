@@ -1,0 +1,282 @@
+
+    {% extends "main.html" %}
+    {% load static %}
+    {% block content %}    
+    <style>
+        @media only screen and (max-width: 373px){
+            .star-img{
+                display: flex;
+            }
+            .fimg{
+                display: none;
+            }
+            .nav-search{
+                width: 800px;
+                margin-right: 20px;
+            }
+            .nav-search-input{
+                width: 800px;
+            }
+        }
+        @media only screen and (max-width: 375px){
+            .product-main-image img{
+                width: 250px;
+            }
+            .product-icons img{
+                width: 50px;
+            }
+            .product-icons{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 0px;
+            }
+            .product-d-details .product-title{
+                font-size: 17px;
+            }
+            .product-card{
+                min-width: 140px;
+            }  
+            .product-card img{
+                margin: 0 10px;
+            }
+            .product-card h4{
+                font-size: 14px;
+            }
+            .product-img-container{
+                gap-x:0px;
+                padding-right: 0px;
+            }
+        }
+        @media only screen and (max-width: 441px){
+            .product{
+                grid-template-columns: repeat(auto-fit, minmax(140px, auto));
+                gap: 1rem;
+                padding:10px; 
+            }
+            footer{
+                gap-x: 5rem;
+                display: flex;
+                align-items: space-between;
+                pading: 10px 20px;
+            }
+            footer img{
+                width: 150px;
+            }
+        }
+    </style>
+    <nav>
+        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180"><img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""></a>
+        <div class="nav-country">
+            <img src="{% static "./assets/location_icon.png" %}" height="20" alt="">
+            <div>
+                <p>Deliver to</p>
+                <h1>United Kingdom</h1>
+            </div>
+        </div>
+        <form action="{% url "searchproducts" %}" method="POST">
+        <div class="nav-search">
+            
+            <div class="nav-search-category">
+                <p>All</p>
+                <img src="{% static "./assets/dropdown_icon.png" %}" height="12" alt="">
+            </div>
+            {% csrf_token %}
+            <input type="search" id="searchproduct" class="nav-search-input" placeholder="Search products , and more" name="productsearch" required>
+            <button type="submit"><img src="{% static "./assets/search_icon.png" %}" class="nav-search-icon" alt=""></button>
+        
+        </div>
+    </form>
+
+        
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <img src="{% static "./assets/user.png" %}" width="20px" alt="">
+                <a class="dropbtn">{{ request.user }}</a>
+                <img src="{% static "./assets/dropdown_icon.png" %}" height="10px" width="10px" class="d" alt="">
+                <div class="sub-menu">
+                    <ul> 
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Actions</a></li>
+                        <li><a href="{% url 'log' %}">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+                {% else %}
+                <div class="nav-text">
+                    <p><a href="{% url "signup" %}">Hello, Sign in</a></p>
+                    <h1>Account & Lists <img src="{% static "./assets/dropdown_icon.png" %}" width="8px" alt=""></h1
+                </div>
+                {% endif %}
+                <div class="nav-text">
+                    <a href="{% url "myorders" %}"><p>Return</p>
+                    <h1>& Orders</h1></a>
+                </div>
+        <a href="/cart.html" class="nav-cart">
+            <img src="{% static "./assets/cart_icon.png" %}" width="35px" alt="">
+            <h4>Cart</h4>
+        </a>
+    </nav>
+    
+        <div class="nav-bottom">
+            <div>
+                <img src="{% static "./assets/menu_icon.png" %}" width="25px" alt="">
+                <p>All</p>
+            </div>
+            <p>Todey's Deals</p>
+            <p>customer Service</p>
+            <p>Registry</p>
+            <p>Gifts Cards</p>
+            <p>Sell</p>
+        </div>
+    {% for item in Product %}
+    
+    <div class="product-display productData">
+        <div class="product-d-image">
+            <div class="product-icons">
+                <img src="{{ item.first_side_image.url }}" width="60" alt="">
+                <img src="{{ item.second_side_image.url }}" width="60" alt="">
+                <img src="{{ item.third_side_image.url }}" width="60" alt="">
+                <img src="{{ item.fourth_side_image.url }}" width="60" alt="">
+            </div>
+            
+            <div class="product-main-image"> 
+                    <img src="{{ item.image.url }}" width="320px" alt="cate/">
+            </div>
+        </div>
+        
+        <div class="product-d-details">
+            <p class="product-title">
+                {{ item.short_description }}
+            </p>
+            <p class="brand-store">Visite the Bengoo store</p>
+            <div class="Product-rating">
+                <div>
+                    <div>4.3 <img src="{% static "./assets/rating_img.png" %}" height="20px"></div>
+                </div>
+                <p>104,185 ratings | Search this page</p>
+            </div>
+            <p><span>#1 Best Seller</span> </p>
+            <h5>10K+ bought in past month</h5>
+            <hr>
+            <div class="product-d-price">
+                <div>
+                    <p>-{{ item.offer }}%</p>
+                    <h1>Rs. {{ item.selling_price }}0</h1>
+                </div>
+                <h5>Lists Price: Rs.<span>{{ item.original_price }}0</span></h5>
+            </div>
+            
+            {% comment %} <div class="product-color-selection">
+                <p>Color: <b>Blue</b></p>
+                <div class="color-options">
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Black</p>
+                    </div>
+
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Green</p>
+                    </div>
+
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Pink</p>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Blue</p>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Purple</p>
+                    </div>
+                    <div class="option">
+                        <img src="./assets/product_img.jpg" width="30px" alt="">
+                    <p>Red</p>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+            <div class="product-description">
+                <h1>About this item</h1>
+                <ul>
+                    <li>
+                        {{ item.description }}  
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="product-d-purchase product_data">
+            <div class="title">
+                <h3>Buy new:</h3><img src="{% static "./assets/circle_icon.png" %}" width="20px" alt="">
+            </div>
+            
+            <h1 class="price">Rs.{{ item.selling_price }}</h1>
+        <div class="gap">
+            <p>Get <b>Fast, Shipping</b> with <span> Prime</span></p>
+            <p><span>Free Returns</span> & <span>Free Delevery</span></p>
+        </div>
+
+        <h2 class="product-stock">In Stock</h2>
+        {% csrf_token %}
+        <div class="qty_group">
+            <label for= "Quantity">Quantity</label>
+            <div class="input-group">
+                <button class="decrement all h">-</button>
+                <input type="text" name="quantity" class="in all" value="1">
+                <button class="increment all h">+</button>
+            </div>
+        </div>
+            
+        <input type="hidden" value="{{ item.id }}" class="prod_name">
+            
+        <button type="button" class="btn addToCartBtn">Add to Cart</button>
+
+    </div>
+    </div>
+    {% endfor %}
+
+    <div class="produtcs-slider-with-price">
+        <h2>Related Products</h2>
+        <div class="products">
+            {% for item in Pro %}
+            <a href="{% url "product-page" item.name item.slug %}">
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="{{ item.image.url }}" alt="ss">
+                </div>
+                <div class="product-offer">
+                    <p>27% off</p> <span>Deal</span>
+                </div>
+                <p class="product-price">Rs. <span>{{ item.selling_price }}</span> List Price: {{ item.original_price }}</p>
+                <h4>This product is best for you</h4>
+            </div>
+        </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <footer>
+        <img src="{% static "./assets/city.png" %}" width="170" alt="">
+        <p>@ 1996-2024, Conti Market Corner.com, Inc. or its affiliates</p>
+    </footer>
+
+    <script>
+        const scrollContainer = document.querySelectorAll('.products');
+        {% comment %} const addToCartBtn = document.querySelector('.addToCartBtn');
+        const products_name = document.querySelector('.prod_name'); {% endcomment %}
+    for(const item of scrollContainer){
+        item.addEventListener('wheel', (evt)=>{
+            evt.preventDefault();
+            item.scrollLeft += evt.deltaY;
+        })
+    }
+        </script>
+        
+
+        
+        {% comment %} <script src="{% static "js/product.js" %}"></script> {% endcomment %}
+    {% endblock %}

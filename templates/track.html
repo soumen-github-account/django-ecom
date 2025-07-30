@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Track</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "track.css" %}">
+    <style>
+        @media only screen and (max-width: 600px){
+                
+            .box{
+                flex-wrap: wrap;
+            }
+            .box .box2{
+                padding-left: 0vh;
+            }
+            .content-table3{
+                min-width: 100%;
+            }
+            .box .box1{
+                width: 100%;
+                padding-left: 5px;
+            }
+        }
+        @media only screen and (max-width: 600px){
+            .content-table3{
+                font-size: 0.7em;
+                min-width: 100%;
+            }
+            .content-table3 th{
+                padding: 10px 10px;
+            }
+            .content-table3 td{
+                padding: 0px 8px;
+            }
+            .box{
+                padding-left: 8px;
+            }
+        }
+        @media only screen and (max-width: 431px){
+            {% comment %} .content-table3 th{
+                padding: 10px 10px;
+            }
+            .content-table3{
+                padding: 5px 13px;
+                margin-left: 10px;
+            }
+            .content-table3 td{
+                padding: 0px 5px;
+            }
+            .content-table3{
+                font-size: 0.7em;
+                min-width: 100%;
+            }
+            
+            } {% endcomment %}
+            .box2 h6{
+                font-size: 0.8em;
+                padding-left: 10px;
+            }
+            .box2 h6 span{
+                padding-left: 23vh;
+            }
+
+            .d1 .p{
+                
+                margin-left: 6px;
+                height: 30px;
+                width: 100%;
+            }
+            
+            .box2 .p-2{
+                font-size: 1.2em;
+            }
+            .main{
+                margin: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <p class="p-5">Order View</p>
+        <div class="box">
+            <div class="box1">
+                <p>Shopping Details</p>
+                <hr>
+                <div class="add">
+                    <label class="mt-1">First Name</label>
+                    <div class="p-1">{{ order.name }}</div>
+                    <label class="mt-1">Email</label>
+                    <div class="p-1">{{ order.email }}</div>
+                    <label class="mt-1">Contact no.</label>
+                    <div class="p-1">{{ order.phone }}</div>
+                    <label class="mt-1">Address</label>
+                    <div class="p-1">{{ order.city }},{{ order.area }},{{ order.house_name }}</div>
+                    <label class="mt-1">Zip Code</label>
+                    <div class="p-1">{{ order.pincode }}</div>
+                </div>
+            </div>
+            <div class="box2">
+                <p class="p-2">Order Details</p>
+                <hr>
+                <table class="content-table3">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in orderitems %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.price }}</td>
+                            <td><img src="{{ item.product.image.url }}" width="50px" alt=""></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                <h6>Grand Total
+                    <span>Rs.{{ order.total_price }}</span>
+                </h6>
+                <div class="d1">
+                    <div class="p">
+                        <p>Payment Mode : {{ order.payment_mode }}</p>
+                    </div>
+                    <div class="p">
+                        <p>Order status : {{ order.status }}</p>
+                    </div>
+                    <div class="p">
+                        <p>Tracking No : {{ order.tracking_no }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

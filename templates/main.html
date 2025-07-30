@@ -1,0 +1,359 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "product.css" %}">
+    
+    <style>
+        .qty_group label{
+            font-size: 20px;
+        }
+        .qty_group .input-group{
+            display: flex;  
+            padding-top: 8px;
+        }
+        
+        .input-group .all{
+            width: 40px;
+            height: 40px;
+            font-size: 17px;
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            border: 0.5px solid rgb(81, 80, 80);
+        }
+        .input-group .in{
+            text-align: center;
+        }
+        
+        .input-group .h{
+            background: #c8c6c6;
+        }
+        .input-group .h:hover{
+            background: #e3dfdf;
+        }
+
+        .product-d-price div h1{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .product-d-price div h5{
+            font-size: 20px;
+            color: #565656;
+            font-weight: 400;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <style>
+        .sub-menu{
+            display:none;
+        }
+        .dropdown:hover .sub-menu{
+            display:block;
+            position: absolute;
+            margin-top:15px;
+            margin-left: 50px;
+        }
+        .dropdown:hover .sub-menu ul{
+            display:block;
+            margin:10px;
+        }
+        .dropdown:hover .sub-menu ul li{
+            width:100px;
+            padding:8px;
+            border-bottom:1px dotted #fff;
+            background: #AB4459;
+            border-radius:0;
+            text-align:left;
+        }
+        .dropdown:hover .sub-menu ul li:hover{
+            background: #AB4470;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+          var availableTags = [
+
+          ];
+          $.ajax({
+            method: "GET",
+            url: "/product-list",
+            success: function(response){
+                console.log(response)
+                availableTags=response
+                startAutocomplete(response)
+            }, 
+            
+        });
+        function startAutocomplete(availableTags){
+          $( "#searchproduct" ).autocomplete({
+            source: availableTags
+          });
+        }
+        });
+
+        </script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.increment').click(function (e){
+            e.preventDefault();
+
+            var inc_value = $(this).closest('.product_data').find('.in').val();
+            var value = parseInt(inc_value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            if(value < 10)
+            {
+                value++;
+                $(this).closest('.product_data').find('.in').val(value);
+            
+            }
+            
+            });
+
+            $('.decrement').click(function (e){
+            e.preventDefault();
+
+            var inc_value = $(this).closest('.product_data').find('.in').val();
+            var value = parseInt(inc_value, 10);
+            value = isNaN(value) ? 0 : value;
+
+            if(value > 1)
+            {
+                value--;
+                $(this).closest('.product_data').find('.in').val(value);
+            
+            };
+            });
+
+            $('.addToCartBtn').click(function (e) {
+                e.preventDefault();
+        
+                var product_name= $(this).closest('.productData').find('.prod_name').val();
+                var product_qty= $(this).closest('.productData').find('.in').val();
+                var token= $('input[name=csrfmiddlewaretoken]').val();
+                $.ajax({
+                    method: "POST",
+                    url: "/add-to-cart",
+                    data: {
+                        'product_name':product_name,
+                        'product_qty':product_qty,
+                        csrfmiddlewaretoken: token
+                    },
+                    success: function(response){
+                        console.log(response);
+                    }, 
+    
+                });
+            });
+        });
+    </script>
+
+    <style>
+        nav{
+            background: #3B1C32;
+        }
+    @media only screen and (max-width: 900px){
+        nav{
+            flex-wrap: wrap;
+            
+        }
+        nav .fimg{
+            width:130px;
+        }
+        .nav-search{
+            order: 10;
+            margin: 10px 0 0 5px;
+            max-width: 50vh;
+            
+            {% comment %} height:30px; {% endcomment %}
+            
+        }
+        
+        .nav-search-category{
+            display:none;
+        }
+        .slide .im img{
+            width:10px;
+        }
+        .header-slider a{
+            top:28%;
+            padding:2vh 1vw;
+            font-size:15px;
+        }
+    }
+    .slide .im img{
+        width:200px;
+    }
+    @media only screen and (max-width: 673px){
+        .nav-country{
+            display:none;
+        }
+        .dropdown{
+            width: 40px;
+            
+        }
+        
+        .nav-cart{
+           weidth:20px; 
+            
+        }
+        .nav-bottom{
+            font-size:13px;
+            gap:10px;
+            overflow-x:scroll;
+        }
+        .nav-bottom::-webkit-scrollbar{
+            display: none;
+        }
+        .nav-bottom p{
+            text-wrap: nowrap;
+        }
+        
+    }
+    @media only screen and (max-width: 460px){
+        .header-slider a{
+            top:28%;
+        }
+        .nav-search{
+            max-width: 30vh;
+            
+        }
+        .dropdown .dropbtn{
+            font-size: 15px;
+        }
+        .dropdown .u{
+            width:17px;
+            height:17px;
+        }
+        .nav-text{
+            margin-top: 4px;
+        }
+        .nav-text h1{
+            font-size:12px;
+        }
+        .nav-cart{
+            margin-top:4px;
+        }
+        .nav-cart img{
+            width:27px;
+        }
+        .nav-cart h4{
+            font-size: 10px;
+        }
+        footer{
+            justify-content: center;
+            
+            
+        }
+        footer img{
+            width:140px;
+        }
+        footer p{
+            font-size: 10px;
+        }
+        
+    }
+    @media only screen and (max-width: 498px){
+        .product-catagory{
+            grid-template-columns: repeat(auto-fit, minmax(140px, auto));
+            padding: 5px 10px 5px 0px;
+            gap: 0.5rem;
+        }
+        .heading p{
+            font-size: 20px;
+        }
+        .new{
+            padding: 5px 5px 5px 5px;
+        }
+        .row-c{
+            width:150px;
+            padding-bottom: 9px;
+        }
+        .row-c .img{
+            width:130px;
+        }
+        
+        .row-c .t{
+            font-size: 13px;
+        }
+        .row-c .p{
+            font-size: 13px;
+        }
+        .sale{
+            display: none;
+        }
+        .slider-1{
+            display: none;
+        }
+        .name{
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 390px){
+        .nav-search{
+            max-width: 29vh;
+            
+        }
+        nav .fimg{
+            width:100px;
+        }
+        footer img{
+            width:110px;
+        }
+        footer p{
+            font-size: 8px;
+        }
+        
+    }
+    @media only screen and (max-width: 900px){
+        .product-display{
+            flex-wrap: wrap;
+        }
+        
+    }
+    @media only screen and (max-width: 460px){
+        .product-d-purchase{
+            max-width:90%;
+            margin: 20px auto 10px;
+        }
+        .product-icons{
+            padding-top: 50px;
+        }
+        .product-main-image img{
+            width: 290px;
+        }
+        .product-icons img{
+            width: 40px;
+        }
+        .product-d-details{
+            max-width:100%;
+            margin: 20px auto 14px;
+        }
+    }
+    .product-d-purchase .btn{
+        background: #78B3CE;
+        border-radius: 5px;
+        
+    }
+    </style>
+</head>
+<body>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>

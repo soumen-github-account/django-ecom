@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="{% static "signin.css" %}">
+    <style>
+        .signin-container button{
+            background:#FC8F54;
+            font-size:16px;
+        }
+        .signin-container button:hover{
+            background: #FF7F3E;
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><img class="logo" src="{% static "./assets/slogo.jpg" %}" width="60px" 
+        alt=""></a>
+        <div class="signin-container">
+            <h1 class="signin-title">Sign in</h1>
+            <form action="" method="post">
+                {% csrf_token %}
+            <h5 class="input-lable">User Name</h5>
+            <input type="text" placeholder="Enter user-name" name="username">
+            <h5 class="input-lable">Password</h5>
+            <input type="password" placeholder="At least 6 characters" name="password">
+            <button>Continue</button>
+            <p class="signin-condition">By continuing, you agree to Ctcorners's <span>Conditions of
+                Use</span> and <span>Privacy Notice</span>.</p>
+            <p class="signin-help">&#9656 <span>Need Help</span></p>
+            </form>
+        <hr>
+        <h4>Buying for work?</h4>
+        <p class="signin-busisness"><span>Shop on Amazon Busisness</span></p>
+        </div>
+        
+        <div class="signin-bottom">
+            <hr>
+            <p>New to Amazon?</p>
+            <hr>
+        </div>
+        <a href="/signup.html">
+        <button class="signin-signup-btn">Create your account</button>
+        </a>
+        </body>
+</html>

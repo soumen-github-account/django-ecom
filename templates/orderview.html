@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block orderview %}
+    
+    
+    <section>
+        <div class="orderpack2">
+            <h3>My Orders</h3>
+            <hr>
+            <table class="content-table2">
+                <thead>
+                    <tr>
+                        <th>Order Date</th>
+                        <th class="tr">Traking Number</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in orders %}
+                    <tr>
+                        <td>{{ item.created_at }}</td>
+                        <td class="tr">{{ item.tracking_no }}</td>
+                        <td>{{ item.total_price }}</td>
+                        <td>{{ item.status }}</td>
+                        <td><a href="{% url "orderview" item.tracking_no %}"><button>View</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+        </div>
+    </section>
+
+    
+{% endblock %}

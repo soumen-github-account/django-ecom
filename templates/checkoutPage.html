@@ -1,0 +1,123 @@
+
+<style>
+    @media only screen and (max-width: 1141px){
+        .main{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items:center;
+            padding-left: 0px;
+        }
+        
+        .box2{
+            margin: 0px 240px;
+            display: flex;
+            
+        }
+        .orderpack{
+            margin-left: 0px;
+        }
+    }
+    @media only screen and (max-width: 1141px){
+        .form{
+            display:flex;
+            margin: 20px 20px 0px 0px;
+        }
+        .box2{
+            margin: 0px 140px;
+            display: flex;
+            
+        }
+    }
+    @media(max-width: 600px){
+        .form{
+            display:flex;
+            padding: 0px;
+        }
+    }
+    @media(max-width: 488px){
+        .pname{
+            display:none;
+        }
+        .content-table th{
+            padding: 5px 5px;
+        }
+        .content-table{
+            min-width:200px;
+        }
+        
+    }
+    
+    
+</style>
+
+
+{% extends "base.html" %}
+{% load static %}
+
+    {% block checkout %}
+    
+    
+    <section>
+        <form action="{% url "placeorder" %}" method="POST">
+            {% csrf_token %}
+        <div class="main">
+            <div class="form checkoutform">
+                <div class="f">
+                    <h1>Basic Details</h1>
+                    <hr>
+                    <label for="">Full Name</label>
+                    <input type="text" value="{{ request.user.name }}" name="name" placeholder="Enter your name" required>
+                    <label for="">Email</label>
+                    <input type="text" value="{{ request.user.email }}" name="email" placeholder="Enter your email" required>
+                    <label for="">Phone Number</label>
+                    <input type="text" name="phone" value="{{ request.user.phone }}" placeholder="Enter Phone Number" required>
+                    <label for="">Address</label>
+                    <input type="text" name="city" value="{{ request.user.city }}" placeholder="city" required>
+                    <input type="text" name="pin" value="{{ request.user.pincode }}" placeholder="Pin code" required>
+                    <input type="text" name="area" value="{{ request.user.area }}" placeholder="Road name, area ,Colony" required>
+                    <input type="text" name="hname" value="{{ request.user.house_name }}" placeholder="House name, Building Name" required>
+            </div>
+            </div>
+            <div class="box2">
+                <div class="orderpack">
+                <h3>Order Summary</h3>
+                <hr>
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th class="pname">Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cartitems %}
+                        <tr>
+                            <td><img src="{{ item.product.image.url }}" alt="" width="50px"></td>
+                            <td class="pname">{{ item.product.name }}</td>
+                            <td>{{ item.product_qty }}</td>
+                            <td>Rs.{{ item.product.selling_price }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+                
+                <h6>Grand Total
+                    <span>Rs.{{ totalprice }}</span>
+                </h6>
+                <input type="hidden" value="COD" name="payment_mode">
+                <button type="submit">Palce Order | Cash on Delevary</button>
+            
+            </div>
+            </div>
+        </div>
+    </form>
+    </section>
+    <footer>
+        <img src="{% static "./assets/city.png" %}" width="170" alt="">
+        <p>@ 1996-2024, Conti Market Corner.com, Inc. or its affiliates</p>
+    </footer>
+    {% endblock %}
