@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from decouple import config
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,16 +76,48 @@ WSGI_APPLICATION = 'home.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django-ecom',         
+#         'USER': 'root',                
+#         'PASSWORD': 'soumen123456', 
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
+# mysql://root:nDLGerDUEWPuYOraQXwUUdGbnTxPqjgu@gondola.proxy.rlwy.net:49724/railway
+# mysql -h gondola.proxy.rlwy.net -u root -p nDLGerDUEWPuYOraQXwUUdGbnTxPqjgu --port 49724 --protocol=TCP railway
+# railway connect MySQL
+
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django-ecom',         
-        'USER': 'root',                
-        'PASSWORD': 'soumen123456', 
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'nDLGerDUEWPuYOraQXwUUdGbnTxPqjgu',
+#         'HOST': 'gondola.proxy.rlwy.net',
+#         'PORT': '49724',
+#     }
+# }
 
 
 # DATABASES = {
