@@ -255,8 +255,8 @@
             }
             @media only screen and (max-width: 390px){
                 .nav-search{
-                    max-width: 29vh;
-                    
+                    {% comment %} max-width: 29vh; {% endcomment %}
+                    display: none;
                 }
                 nav .fimg{
                     width:100px;
@@ -267,6 +267,7 @@
                 footer p{
                     font-size: 8px;
                 }
+                
                 
             }
         </style>
@@ -406,7 +407,9 @@
         </head>
 <body>
     <nav>
-        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180"><img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""></a>
+        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180">
+            {% comment %} <img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""> {% endcomment %}
+        </a>
         <div class="nav-country">
             <img src="{% static "./assets/location_icon.png" %}" height="20" alt="">
             <div>

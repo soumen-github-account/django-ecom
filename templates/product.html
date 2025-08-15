@@ -11,9 +11,9 @@
                 display: none;
             }
             .nav-search{
-                width: 800px;
-                margin-right: 20px;
+                display: none;
             }
+            
             .nav-search-input{
                 width: 800px;
             }
@@ -66,7 +66,9 @@
         }
     </style>
     <nav>
-        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180"><img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""></a>
+        <a href="/"><img class="fimg" src="{% static "./assets/city.png" %}" width="180">
+            {% comment %} <img class="star-img" src={% static "./assets/star.png" %} width="30" alt=""> {% endcomment %}
+        </a>
         <div class="nav-country">
             <img src="{% static "./assets/location_icon.png" %}" height="20" alt="">
             <div>
@@ -118,7 +120,7 @@
         </a>
     </nav>
     
-        <div class="nav-bottom">
+        {% comment %} <div class="nav-bottom">
             <div>
                 <img src="{% static "./assets/menu_icon.png" %}" width="25px" alt="">
                 <p>All</p>
@@ -128,7 +130,7 @@
             <p>Registry</p>
             <p>Gifts Cards</p>
             <p>Sell</p>
-        </div>
+        </div> {% endcomment %}
     {% for item in Product %}
     
     <div class="product-display productData">
