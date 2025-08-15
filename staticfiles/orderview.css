@@ -1,0 +1,50 @@
+body{
+    background: #ffffff;
+}
+
+section{
+    background: #ffffff;
+    margin: 20px 20px 20px 20px;
+    padding: 20px;
+}
+.orderpack2{
+    padding: 20px 10px 20px 10px;
+    max-width: 400vh;
+    box-shadow: 0 0 5px rgb(22, 22, 22);
+}
+.orderpack2 hr{
+    margin: 10px 0 10px 0;
+}
+
+
+.content-table2{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    width: 100%;
+}
+.content-table2 thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.content-table2 th,
+.content-table2 td{
+    padding: 12px 15px;
+}
+.content-table2 tbody tr{
+    border-bottom: 1px solid #a39f9f;
+}
+
+.content-table2 td button{
+    height: 30px;
+    width: 70px;
+    border-radius: 3px;
+    background: rgb(40, 40, 133);
+    border: 4px solid rgb(101, 101, 187);
+    color: #ffffff;
+    cursor: pointer;
+}
+.content-table2 td button:hover{
+    background: rgb(86, 86, 188);
+}

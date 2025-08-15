@@ -1,0 +1,176 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Outfit;
+}
+
+body{
+    background: #dadada;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #131921;
+    padding: 10px 20px ;
+    color: #fff;
+}
+
+.nav-country{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    font-size: 13px;
+    color: #c4c4c4;
+}
+
+.nav-country h1{
+    color: #fff;
+    font-size: 14px;
+}
+
+.nav-search{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    color: grey;
+    max-width: 1000px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+.nav-search-category{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 5px;
+    background: #e5e5e5;
+    border-radius: 4px;
+}
+
+.nav-search-input{
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    width: 100%;
+}
+.nav-search-icon{
+    max-width: 41px;
+    padding: 8px;
+    background: #ffd64f;
+    border-radius: 0 4px 4px 0;
+}
+
+.nav-language{
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.nav-text{
+    margin-left: 15px;
+}
+
+.nav-text p{
+    font-size: 10px;
+}
+
+.nav-text h1{
+    font-size: 14px;
+}
+
+.nav-cart{
+    display: flex;
+    align-items: center;
+    margin: 0px 15px;
+}
+
+.product{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(157px, auto));
+    gap: 2rem;
+    background: #fff;
+    padding: 20px;
+    
+}
+.row{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-left: 10px;
+    position: relative;
+    transition: all .40s;
+    background: #fbfbfb;
+}
+.row .img{
+    width: 130px;
+    height: auto;
+    transition: all .40s;
+    cursor: pointer;
+}
+.row .img:hover{
+    transform: scale(0.9);
+}
+.product-section{
+    background: #fff;
+    width: 100%;
+    padding-bottom: 20px;
+    padding: 10px;
+}
+.product-text h5{
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: #27b737;
+    padding: 3px 10px;
+    border-radius: 2px;
+}
+.heart-icon{
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+}
+
+
+.product-offer p{
+    background: #be0b3b;
+    color: #fff;
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 2px;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.product-offer span{
+    color: #be0b3b;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+
+
+.price p{
+    color: 14px;
+    font-size: 14px;
+    font-weight: 600;
+}

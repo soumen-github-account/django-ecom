@@ -1,0 +1,95 @@
+body{
+    background: #ffffff;
+}
+
+.main{
+    margin: 20px 50px 40px 50px;
+    padding: 8px 0 0 0;
+    max-width: 400vh;
+    background: #d8d8d8;
+    box-shadow: 0 0 5px rgb(22, 22, 22);
+}
+
+.main .p-5{
+    margin: 0 0 8px 90px;
+    font-size: 20px;
+
+}
+.box{
+    display: flex;
+    background: #ffffff;
+    padding: 25px;
+}
+.box1 p{
+    font-size: 1.5em;
+}
+.box1 hr{
+    margin: 10px 0 10px 0;
+}
+.box .box1{
+    width: 70vh;
+    padding-left: 55px;
+}
+.add .mt-1{
+    margin-top: 10px;
+}
+.box1 .p-1{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid black;
+    margin: 2px 0 10px 0;
+}
+.box .box2{
+    padding-left: 20vh;
+}
+
+/* order */
+
+.content-table3{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 500px;
+}
+.content-table3 thead tr{
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.content-table3 th{
+    padding: 12px 15px;
+}
+.content-table3 td{
+    padding: 2px 15px;
+}
+.content-table3 tbody tr{
+    border-bottom: 1px solid #a39f9f;
+}
+.box2 h6{
+    font-size: 1.2em;
+    padding-left: 20px;
+}
+.box2 h6 span{
+    padding-left: 25vh;
+}
+.d1 .p{
+    padding-left: 10px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.box2 .p-2{
+    font-size: 1.5em;
+}
+
+.box2 hr{
+    margin: 10px 0 10px 0;
+}
